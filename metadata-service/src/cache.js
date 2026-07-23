@@ -13,6 +13,14 @@ function createCache(redisUrl) {
     console.warn('[redis] connection error:', err.message);
   });
 
+  // node-redis v4 auto-reconnects in the background after a drop. 'ready' fires
+  // both on the initial connect AND every successful reconnect, so this is what
+  // lets `connected` self-heal instead of latching false forever after one blip.
+  client.on('ready', () => {
+    connected = true;
+    console.log('[redis] connection restored');
+  });
+
   async function connect() {
     try {
       await client.connect();

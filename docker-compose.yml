@@ -66,3 +66,19 @@ services:
       - drivers
       - tracking
       - web
+      - metadata
+# --- Metadata (Node / Express / SQLite / Redis cache) ---
+  metadata:
+    build: ./metadata-service
+    environment:
+      REDIS_URL: redis://redis:6379
+      DB_PATH: /app/data/metadata.db
+      PORT: 8084
+    volumes:
+      - metadata-data:/app/data
+    depends_on:
+      - redis
+
+volumes:
+  metadata-data:
+      
