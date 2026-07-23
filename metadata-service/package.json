@@ -1,0 +1,16 @@
+{
+  "name": "metadata-service",
+  "version": "1.0.0",
+  "description": "Serves shared ride metadata (fare rates, peak factor) cached in Redis to survive rush-hour surges.",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "redis": "^4.7.0",
+    "better-sqlite3": "^11.3.0"
+  }
+}
